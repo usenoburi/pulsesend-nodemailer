@@ -1,0 +1,29 @@
+name: Publish
+
+# Publie sur npm quand un tag vX.Y.Z est poussé. Seul ce workflow peut publier : c'est lui que
+# npm reconnaît comme éditeur de confiance (Trusted Publisher), sans jeton stocké.
+on:
+    push:
+        tags: ['v*']
+
+jobs:
+    publish:
+        name: Publish to npm
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24'
+                  registry-url: 'https://registry.npmjs.org'
+            # La publication par éditeur de confiance (OIDC) demande npm 11.5.1 ou plus.
+            - run: npm install -g npm@^11.5.1
+            - run: pnpm install --frozen-lockfile
+            - name: Tag matches package.json
+              run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+            # prepublishOnly lance la vérification des types, les tests et le build avant l'envoi.
+            - run: npm publish --provenance --access public

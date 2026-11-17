@@ -118,7 +118,7 @@ pnpm run typecheck
 pnpm run build
 ```
 
-A release: set `version` in `package.json` and `VERSION` in `src/transport.ts`, add the `CHANGELOG.md` entry, then push the tag `vX.Y.Z` on the mirror; the workflow tests and publishes to npm with provenance.
+A release: set `version` in `package.json` and `VERSION` in `src/transport.ts`, add the `CHANGELOG.md` entry, then push the tag `vX.Y.Z` on the mirror: `.github/workflows/publish.yml`, the trusted publisher declared on npm, checks the types, tests, builds and publishes with provenance.
 
 ## License
 

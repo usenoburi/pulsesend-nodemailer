@@ -3,7 +3,6 @@ name: Tests
 on:
     push:
         branches: [main]
-        tags: ['v*']
     pull_request:
 
 jobs:
@@ -30,25 +29,3 @@ jobs:
             # tsdown demande Node 22.18 ou plus ; le paquet construit, lui, tourne sous Node 20.
             - run: pnpm run build
               if: matrix.node != '20'
-
-    publish:
-        name: Publish to npm
-        needs: test
-        if: startsWith(github.ref, 'refs/tags/v')
-        runs-on: ubuntu-latest
-        permissions:
-            contents: read
-            id-token: write
-        steps:
-            - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: '22'
-                  registry-url: 'https://registry.npmjs.org'
-            - run: pnpm install --frozen-lockfile
-            - name: Tag matches package.json
-              run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
-            - run: pnpm run build
-            # Trusted publishing (OIDC) : aucun jeton npm stocké, provenance attachée au paquet.
-            - run: npm publish --provenance --access public
