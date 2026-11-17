@@ -1,11 +1,11 @@
-# @pulsesend/nodemailer
+# @noburi/nodemailer
 
 [Nodemailer](https://nodemailer.com) transport for the [PulseSend](https://pulse-send.jiordiviera.me) transactional email API. Keep your Nodemailer code, send through the API: you get PulseSend ids, tags, scheduling, templates and idempotency, with no SMTP connection to manage.
 
 ## Install
 
 ```bash
-npm install nodemailer @pulsesend/nodemailer
+npm install nodemailer @noburi/nodemailer
 ```
 
 Requires Node 20 or later and Nodemailer 6.9 or later.
@@ -14,7 +14,7 @@ Requires Node 20 or later and Nodemailer 6.9 or later.
 
 ```js
 import nodemailer from 'nodemailer';
-import pulsesend from '@pulsesend/nodemailer';
+import pulsesend from '@noburi/nodemailer';
 
 const transporter = nodemailer.createTransport(
     pulsesend({ apiKey: process.env.PULSESEND_API_KEY }),
@@ -33,7 +33,7 @@ console.log(info.messageId); // em_...
 
 The `from` address must be on a [verified domain](https://docs.pulse-send.jiordiviera.me/add-a-domain). With a `ps_test_` key nothing is delivered, which is handy in development and tests.
 
-CommonJS works too: `const { PulseSendTransport } = require('@pulsesend/nodemailer')`, then `nodemailer.createTransport(new PulseSendTransport({ apiKey }))`.
+CommonJS works too: `const { PulseSendTransport } = require('@noburi/nodemailer')`, then `nodemailer.createTransport(new PulseSendTransport({ apiKey }))`.
 
 ## Options
 
@@ -88,7 +88,7 @@ Refused before any call, because the API can't carry them: `raw`, `icalEvent` (a
 On failure it rejects with a `PulseSendError`:
 
 ```js
-import { PulseSendError } from '@pulsesend/nodemailer';
+import { PulseSendError } from '@noburi/nodemailer';
 
 try {
     await transporter.sendMail(message);

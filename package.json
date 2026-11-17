@@ -1,6 +1,6 @@
 {
-    "name": "@pulsesend/nodemailer",
-    "version": "0.1.0",
+    "name": "@noburi/nodemailer",
+    "version": "0.1.1",
     "description": "Nodemailer transport for PulseSend: send through the PulseSend API without changing your Nodemailer code.",
     "keywords": [
         "email",

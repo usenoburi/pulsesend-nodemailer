@@ -4,7 +4,7 @@ import { PulseSendError } from './errors.js';
 import { buildPayload } from './payload.js';
 import type { NormalizedMail } from './payload.js';
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 
 const DEFAULT_BASE_URL = 'https://pulse-send.jiordiviera.me';
 
