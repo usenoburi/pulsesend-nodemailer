@@ -27,7 +27,9 @@ jobs:
             - run: pnpm run typecheck
               if: matrix.nodemailer == '10'
             - run: pnpm test
+            # tsdown demande Node 22.18 ou plus ; le paquet construit, lui, tourne sous Node 20.
             - run: pnpm run build
+              if: matrix.node != '20'
 
     publish:
         name: Publish to npm
