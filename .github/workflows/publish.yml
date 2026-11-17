@@ -25,5 +25,15 @@ jobs:
             - run: pnpm install --frozen-lockfile
             - name: Tag matches package.json
               run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+            # Version déjà sur npm (publiée à la main, ou tag repoussé) : rien à faire, sans erreur.
+            - name: Already published?
+              id: published
+              run: |
+                  spec="$(node -p "const p = require('./package.json'); p.name + '@' + p.version")"
+                  if [ -n "$(npm view "$spec" version 2>/dev/null)" ]; then
+                      echo "$spec est déjà sur npm, publication sautée."
+                      echo "skip=true" >> "$GITHUB_OUTPUT"
+                  fi
             # prepublishOnly lance la vérification des types, les tests et le build avant l'envoi.
             - run: npm publish --provenance --access public
+              if: steps.published.outputs.skip != 'true'
