@@ -187,8 +187,7 @@ describe('PulseSendTransport', () => {
                         code: 'domain_not_verified',
                         message: 'acme.com is not verified.',
                         param: 'from',
-                        doc_url:
-                            'https://docs.pulse-send.jiordiviera.me/errors',
+                        doc_url: 'https://docs.send.noburi.space/errors',
                     },
                 },
             },

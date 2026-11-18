@@ -1,6 +1,6 @@
 # @noburi/nodemailer
 
-[Nodemailer](https://nodemailer.com) transport for the [PulseSend](https://pulse-send.jiordiviera.me) transactional email API. Keep your Nodemailer code, send through the API: you get PulseSend ids, tags, scheduling, templates and idempotency, with no SMTP connection to manage.
+[Nodemailer](https://nodemailer.com) transport for the [PulseSend](https://send.noburi.space) transactional email API. Keep your Nodemailer code, send through the API: you get PulseSend ids, tags, scheduling, templates and idempotency, with no SMTP connection to manage.
 
 ## Install
 
@@ -31,19 +31,19 @@ const info = await transporter.sendMail({
 console.log(info.messageId); // em_...
 ```
 
-The `from` address must be on a [verified domain](https://docs.pulse-send.jiordiviera.me/add-a-domain). With a `ps_test_` key nothing is delivered, which is handy in development and tests.
+The `from` address must be on a [verified domain](https://docs.send.noburi.space/add-a-domain). With a `ps_test_` key nothing is delivered, which is handy in development and tests.
 
 CommonJS works too: `const { PulseSendTransport } = require('@noburi/nodemailer')`, then `nodemailer.createTransport(new PulseSendTransport({ apiKey }))`.
 
 ## Options
 
-| Option       | Default                                                        | Role                                                                   |
-| ------------ | -------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `apiKey`     | `PULSESEND_API_KEY`                                            | `ps_live_…` or `ps_test_…`                                             |
-| `baseUrl`    | `PULSESEND_BASE_URL`, then `https://pulse-send.jiordiviera.me` | The transport adds `/api/v1`                                           |
-| `timeout`    | `30000`                                                        | Milliseconds before a request is abandoned                             |
-| `maxRetries` | `2`                                                            | Retries after a 429 (honoring `Retry-After`), a 5xx or a network error |
-| `fetch`      | global `fetch`                                                 | Your own implementation, for tests or a proxy                          |
+| Option       | Default                                                | Role                                                                   |
+| ------------ | ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `apiKey`     | `PULSESEND_API_KEY`                                    | `ps_live_…` or `ps_test_…`                                             |
+| `baseUrl`    | `PULSESEND_BASE_URL`, then `https://send.noburi.space` | The transport adds `/api/v1`                                           |
+| `timeout`    | `30000`                                                | Milliseconds before a request is abandoned                             |
+| `maxRetries` | `2`                                                    | Retries after a 429 (honoring `Retry-After`), a 5xx or a network error |
+| `fetch`      | global `fetch`                                         | Your own implementation, for tests or a proxy                          |
 
 Every send carries an `Idempotency-Key`, generated when you don't give one, so a retry never sends the email twice.
 
@@ -83,7 +83,7 @@ Refused before any call, because the API can't carry them: `raw`, `icalEvent` (a
 
 ## Result and errors
 
-`sendMail` resolves with `messageId` and `id` (the PulseSend id, `em_…`), `status` (`queued` or `scheduled`), `accepted`, `envelope` and `email`, the email as the API returned it. Follow delivery with [webhooks](https://docs.pulse-send.jiordiviera.me/webhooks/introduction).
+`sendMail` resolves with `messageId` and `id` (the PulseSend id, `em_…`), `status` (`queued` or `scheduled`), `accepted`, `envelope` and `email`, the email as the API returned it. Follow delivery with [webhooks](https://docs.send.noburi.space/webhooks/introduction).
 
 On failure it rejects with a `PulseSendError`:
 
@@ -103,11 +103,11 @@ try {
 }
 ```
 
-The codes are listed in [Errors](https://docs.pulse-send.jiordiviera.me/errors).
+The codes are listed in [Errors](https://docs.send.noburi.space/errors).
 
 ## SMTP instead?
 
-PulseSend also has an SMTP relay (`smtp.pulse-send.jiordiviera.me`, ports 587 and 465). Nodemailer's built-in SMTP transport works with it and needs no package; this transport adds PulseSend ids, tags, scheduling, templates and idempotency.
+PulseSend also has an SMTP relay (`smtp.send.noburi.space`, ports 587 and 465). Nodemailer's built-in SMTP transport works with it and needs no package; this transport adds PulseSend ids, tags, scheduling, templates and idempotency.
 
 ## Develop
 

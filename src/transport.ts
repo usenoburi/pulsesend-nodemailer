@@ -6,12 +6,12 @@ import type { NormalizedMail } from './payload.js';
 
 export const VERSION = '0.1.1';
 
-const DEFAULT_BASE_URL = 'https://pulse-send.jiordiviera.me';
+const DEFAULT_BASE_URL = 'https://send.noburi.space';
 
 export interface PulseSendTransportOptions {
     /** API key, `ps_live_…` or `ps_test_…`. Defaults to the PULSESEND_API_KEY environment variable. */
     apiKey?: string;
-    /** Defaults to PULSESEND_BASE_URL, then https://pulse-send.jiordiviera.me. The transport adds /api/v1. */
+    /** Defaults to PULSESEND_BASE_URL, then https://send.noburi.space. The transport adds /api/v1. */
     baseUrl?: string;
     /** Milliseconds before a request is abandoned. Default 30 000. */
     timeout?: number;
