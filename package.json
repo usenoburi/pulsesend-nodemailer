@@ -1,6 +1,6 @@
 {
     "name": "@noburi/nodemailer",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Nodemailer transport for PulseSend: send through the PulseSend API without changing your Nodemailer code.",
     "keywords": [
         "email",
@@ -9,11 +9,11 @@
         "transactional",
         "transport"
     ],
-    "homepage": "https://github.com/useburoo/pulsesend-nodemailer#readme",
+    "homepage": "https://github.com/usenoburi/pulsesend-nodemailer#readme",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/useburoo/pulsesend-nodemailer.git"
+        "url": "git+https://github.com/usenoburi/pulsesend-nodemailer.git"
     },
     "files": [
         "dist",
